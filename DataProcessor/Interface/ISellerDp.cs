@@ -1,6 +1,8 @@
-﻿namespace DuPontRegistry.DataAccess.Interface
+﻿using DuPontRegistry.DataAccess.Interface;
+
+namespace DuPontRegistry.DataProcessor.Interface
 {
-    public interface ISellerDp
+    public interface ISellerDp : IUserDp
     {
     }
 }

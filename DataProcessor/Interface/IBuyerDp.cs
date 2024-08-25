@@ -1,6 +1,6 @@
 ﻿namespace DuPontRegistry.DataAccess.Interface
 {
-    public interface IBuyerDp
+    public interface IBuyerDp : IUserDp
     {
     }
 }

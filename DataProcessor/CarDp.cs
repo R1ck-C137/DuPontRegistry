@@ -1,6 +1,6 @@
 ﻿using DuPontRegistry.DataAccess.Interface;
 
-namespace DuPontRegistry.DataProces
+namespace DuPontRegistry.DataProcessor
 {
     public class CarDp : ICarDp
     {

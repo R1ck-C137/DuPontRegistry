@@ -1,11 +1,7 @@
 
-using DuPontRegistry.DataAccess;
-using DuPontRegistry.Models;
-using DuPontRegistry.Services;
 using NLog.Extensions.Logging;
-using Microsoft.AspNetCore.HttpOverrides;
-using Newtonsoft;
-using Microsoft.OpenApi.Models;
+using NLog;
+using NLog.Web;
 
 namespace DuPontRegistry
 {
@@ -13,6 +9,7 @@ namespace DuPontRegistry
     {
         public static void Main(string[] args)
         {
+            var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
             try 
             { 
                 var builder = WebApplication.CreateBuilder(args);
@@ -43,16 +40,16 @@ namespace DuPontRegistry
 
                 app.Run();
 
-                NLog.LogManager.GetCurrentClassLogger().Info("App started");
+                logger.Info("App started");
             }
             catch (Exception exception)
             {
-                NLog.LogManager.GetCurrentClassLogger().Error(exception, "Stopped program because of exception");
+                logger.Error(exception, "Stopped program because of exception");
                 throw;
             }
             finally
             {
-                NLog.LogManager.Shutdown();
+                LogManager.Shutdown();
             }
         }
     }

@@ -2,9 +2,8 @@
 
 namespace DuPontRegistry.Models
 {
-    public class Seller
+    public class Seller : User
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Web { get; set; }
         public string City { get; set; }
@@ -13,7 +12,5 @@ namespace DuPontRegistry.Models
         public string Metro { get; set; }
         public string State { get; set; }
         public JObject Contact { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime ModifyDate { get; set; }
     }
 }
