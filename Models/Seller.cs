@@ -12,5 +12,14 @@ namespace DuPontRegistry.Models
         public string Metro { get; set; }
         public string State { get; set; }
         public JObject Contact { get; set; }
+        public override string GetFields()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetValues()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

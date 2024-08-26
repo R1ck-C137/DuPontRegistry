@@ -35,8 +35,12 @@ namespace DuPontRegistry.Controllers
         [Route("create/buyer")]
         public JObject CreateBuyer(Buyer buyer)
         {
-            _buyer.CreateNewBuyer(buyer);
-            return new JObject();
+            var idNewBuyer= _buyer.CreateNewBuyer(buyer); //TODO: сделать валидацию по Email
+            return new JObject()
+            {
+                {"success", true},
+                {"Id", idNewBuyer}
+            };
         }
         
         [HttpPost]
@@ -44,12 +48,15 @@ namespace DuPontRegistry.Controllers
         public JObject Login(string login, string password, UserType type)
         {
             if (_user.Login(login, password, type) == false)
+            {
+                Response.StatusCode = 401;
                 return new JObject()
                 {
-                    {"success", false},
-                    {"Error", "Email or password is not correct"}, //TODO: возможно нужно сделать другой код ответа
+                    { "success", false },
+                    { "Error", "Email or password is not correct" },
                 };
-            
+            }
+
             Response.Cookies.Append("sid", _user.Base64Encode(login + ":" + password), _user.GetCookieOptions());
             return new JObject{
                 {"success", true},

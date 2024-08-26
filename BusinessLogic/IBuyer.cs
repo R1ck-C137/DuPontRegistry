@@ -5,6 +5,6 @@ namespace DuPontRegistry.DataAccess
 {
     public interface IBuyer
     {
-        public JObject CreateNewBuyer(Buyer buyer);
+        public int? CreateNewBuyer(Buyer buyer);
     }
 }

@@ -7,9 +7,15 @@ namespace DuPontRegistry.Services
 {
     public class BuyerService : IBuyer
     {
-        public JObject CreateNewBuyer(Buyer buyer)
+        private IBuyerDp _buyerDp;
+
+        public BuyerService(IBuyerDp buyerDp)
         {
-            throw new NotImplementedException();
+            _buyerDp = buyerDp;
+        }
+        public int? CreateNewBuyer(Buyer buyer)
+        {
+            return _buyerDp.CrateBuyer(buyer);
         }
     }
 }
