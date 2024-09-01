@@ -17,10 +17,12 @@ namespace DuPontRegistry.DataProcessor
             if (_connectionString == null)
                 _logger.LogError("connectionString is null!");
         }
-        
-        public int? GetUserId(string login, string password)
+
+        public int? GetUserId(string login, string? password = null)
         {
-            var getUserIdQuery = new NpgsqlCommand($"SELECT \"Id\" FROM public.\"Buyer\" where \"Email\" = \'{login}\' and \"Password\" = \'{password}\'");
+            var getUserIdQuery = new NpgsqlCommand($"SELECT \"Id\" FROM public.\"Buyer\" where \"Email\" = \'{login}\'");
+            if (password != null)
+                getUserIdQuery.CommandText += $" and \"Password\" = \'{password}\'";
             try
             {
                 return (int?)PGSqlUtil.ExecuteScalar(getUserIdQuery, _connectionString!);
@@ -34,7 +36,7 @@ namespace DuPontRegistry.DataProcessor
 
         public int? CrateBuyer(Buyer buyer)
         {
-            var insertNewBuyer = new NpgsqlCommand(@$"INSERT INTO public.""Buyer"" ({buyer.GetFields()}) VALUES ({buyer.GetValues()}) RETURNING ""Id""");
+            var insertNewBuyer = new NpgsqlCommand(@$"INSERT INTO public.""Buyer"" ({buyer.GetFields()}) VALUES ({buyer.GetValuesName()}) RETURNING ""Id""");
             insertNewBuyer.Parameters.Add(new NpgsqlParameter("@Email", buyer.Email));
             insertNewBuyer.Parameters.Add(new NpgsqlParameter("@Password", buyer.Password));
             insertNewBuyer.Parameters.Add(new NpgsqlParameter("@FirstName", buyer.FirstName));

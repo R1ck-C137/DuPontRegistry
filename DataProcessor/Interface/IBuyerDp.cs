@@ -1,4 +1,5 @@
-﻿using DuPontRegistry.Models;
+﻿using DuPontRegistry.DataProcessor.Interface;
+using DuPontRegistry.Models;
 
 namespace DuPontRegistry.DataAccess.Interface
 {

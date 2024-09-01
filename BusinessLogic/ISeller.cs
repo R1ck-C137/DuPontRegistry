@@ -6,6 +6,6 @@ namespace DuPontRegistry.DataAccess
 {
     public interface ISeller
     {
-        public JObject CreateNewSeller(Seller seller);
+        public int? CreateNewSeller(Seller seller);
     }
 }

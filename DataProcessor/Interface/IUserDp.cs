@@ -1,7 +1,7 @@
-﻿namespace DuPontRegistry.DataAccess.Interface
+﻿namespace DuPontRegistry.DataProcessor.Interface
 {
     public interface IUserDp
     {
-        public int? GetUserId(string login, string password);
+        public int? GetUserId(string login, string? password = null);
     }
 }

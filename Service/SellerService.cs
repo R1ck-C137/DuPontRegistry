@@ -1,24 +1,26 @@
 ﻿using DuPontRegistry.DataAccess;
-using DuPontRegistry.DataAccess.Interface;
 using DuPontRegistry.DataProcessor.Interface;
 using DuPontRegistry.Models;
-using DuPontRegistry.Models.Enums;
-using Newtonsoft.Json.Linq;
+using DuPontRegistry.Services;
 
-namespace DuPontRegistry.Services
+namespace DuPontRegistry.Service
 {
     public class SellerService : ISeller
     {
-        private ISellerDp _sellerDp;
-
-        public SellerService(ISellerDp sellerDp)
+        private readonly ISellerDp _sellerDp;
+        private readonly ILogger<BuyerService> _logger;
+        public SellerService(ISellerDp sellerDp, ILogger<BuyerService> logger)
         {
             _sellerDp = sellerDp;
+            _logger = logger;
         }
-        
-        public JObject CreateNewSeller(Seller seller)
+        public int? CreateNewSeller(Seller seller)
         {
-            throw new NotImplementedException();
+            if (_sellerDp.GetUserId(seller.Email) == null) 
+                return _sellerDp.CrateSeller(seller);
+            
+            _logger.LogWarning($"Attempt to create a new user with an existing username {seller.Email}");
+            throw new InvalidDataException("A user with this username already exists");
         }
     }
 }

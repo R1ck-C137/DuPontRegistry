@@ -2,9 +2,9 @@ using DuPontRegistry.Models.Enums;
 
 namespace DuPontRegistry.Models;
 
-public abstract class User
+public abstract class User : IBaseModel
 {
-    public int Id { get; set; }
+    public int Id { get; protected set; }
     public string Email { get; set; }
     public string Password { get; set; }
     public UserType Type { get; set; }
@@ -21,6 +21,18 @@ public abstract class User
         ModifyDate = modifyDate;
     }
 
-    public abstract string GetFields();
-    public abstract string GetValues();
+    public virtual string GetFields()
+    {
+        return $@"""{nameof(Email)}"", ""{nameof(Password)}"", ""{nameof(CreateDate)}"", ""{nameof(ModifyDate)}""";
+    }
+
+    public virtual string GetValuesName()
+    {
+        return $"@{nameof(Email)}, @{nameof(Password)}, @{nameof(CreateDate)}, @{nameof(ModifyDate)}";
+    }
+
+    public virtual string ToString()
+    {
+        return $@"{nameof(Email)}:""{Email}"", {nameof(Password)}:""{Password}"", {nameof(CreateDate)}:""{CreateDate}"", {nameof(ModifyDate)}:""{ModifyDate}""";
+    }
 }

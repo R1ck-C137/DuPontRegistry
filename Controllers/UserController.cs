@@ -12,35 +12,85 @@ namespace DuPontRegistry.Controllers
     [ApiController]
     public class UserController : BaseController
     {
-        private ISeller _seller;
-        private IBuyer _buyer;
-        private IUser _user;
+        private readonly ISeller _seller;
+        private readonly IBuyer _buyer;
+        private readonly IUser _user;
+        private readonly ILogger<UserController> _logger;
         
-        public UserController(ISeller seller, IBuyer buyer, IUser user)
+        public UserController(ISeller seller, IBuyer buyer, IUser user, ILogger<UserController> logger)
         {
             _seller = seller;
             _buyer = buyer;
             _user = user;
+            _logger = logger;
         }
         
         [HttpPost]
         [Route("create/seller")]
         public JObject CreateSeller(Seller seller)
         {
-            _seller.CreateNewSeller(seller);
-            return new JObject();
+            try
+            {
+                var idNewSeller = _seller.CreateNewSeller(seller);
+                Response.StatusCode = 201;
+                return new JObject()
+                {
+                    { "success", true },
+                    { "Id", idNewSeller }
+                };
+            }
+            catch (InvalidDataException ex)
+            {
+                Response.StatusCode = 400;
+                return new JObject()
+                {
+                    { "success", false },
+                    { "Error", ex.Message }
+                };
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex.ToString());
+                return new JObject()
+                {
+                    { "success", false },
+                };
+            }
         }
         
         [HttpPost]
         [Route("create/buyer")]
         public JObject CreateBuyer(Buyer buyer)
         {
-            var idNewBuyer= _buyer.CreateNewBuyer(buyer); //TODO: сделать валидацию по Email
-            return new JObject()
+            try
             {
-                {"success", true},
-                {"Id", idNewBuyer}
-            };
+                var idNewBuyer = _buyer.CreateNewBuyer(buyer);
+                Response.StatusCode = 201;
+                return new JObject()
+                {
+                    { "success", true },
+                    { "Id", idNewBuyer }
+                };
+            }
+            catch (InvalidDataException ex)
+            {
+                Response.StatusCode = 400;
+                return new JObject()
+                {
+                    { "success", false },
+                    { "Error", ex.Message }
+                };
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                _logger.LogError(ex.ToString());
+                return new JObject()
+                {
+                    { "success", false },
+                };
+            }
         }
         
         [HttpPost]

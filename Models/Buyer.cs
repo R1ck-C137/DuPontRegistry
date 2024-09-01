@@ -13,16 +13,15 @@
         }
         public override string GetFields()
         {
-            return $@"""{nameof(Email)}"", ""{nameof(Password)}"", ""{nameof(FirstName)}"", ""{nameof(LastName)}"", ""{nameof(Phone)}"", ""{nameof(CreateDate)}"", ""{nameof(ModifyDate)}""";
+            return base.GetFields() + $@", ""{nameof(FirstName)}"", ""{nameof(LastName)}"", ""{nameof(Phone)}""";
         }
-        public override string GetValues()
+        public override string GetValuesName()
         {
-            return $"'{Email}', '{Password}', '{FirstName}', '{LastName}', '{Phone}', '{CreateDate}', '{ModifyDate}'";
+            return base.GetValuesName() + $", @{nameof(FirstName)}, @{nameof(LastName)}, @{nameof(Phone)}";
         }
         public override string ToString()
         {
-            return $@"Email:""{nameof(Email)}"", Password:""{nameof(Password)}"", FirstName:""{nameof(FirstName)}"", LastName:""{nameof(LastName)}"", 
-                    Phone:""{nameof(Phone)}"", CreateDate:""{nameof(CreateDate)}"", ModifyDate:""{nameof(ModifyDate)}""";
+            return base.ToString() + $@", {nameof(FirstName)}:""{FirstName}"", {nameof(LastName)}:""{LastName}"", {nameof(Phone)}:""{Phone}""";
         }
     }
     
