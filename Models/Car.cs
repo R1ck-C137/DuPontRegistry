@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 namespace DuPontRegistry.Models
 {
-    public class Car 
+    public class Car
     {
         public string Id { get; set; }
         public string Make { get; set; }
@@ -15,5 +15,14 @@ namespace DuPontRegistry.Models
         public int? Modelyear { get; set; }
         public JArray? Pictures { get; set; }
         public string? DealerName { get; set; }
+        public string? Promo { get; set; }
+        public static string GetFields()
+        {
+            throw new NotImplementedException();
+        }
+        public static string GetValuesName()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

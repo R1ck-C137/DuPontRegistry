@@ -2,8 +2,10 @@
 using DuPontRegistry.DataAccess.Interface;
 using DuPontRegistry.DataProcessor;
 using DuPontRegistry.DataProcessor.Interface;
+using DuPontRegistry.Models;
 using DuPontRegistry.Service;
 using DuPontRegistry.Services;
+using DuPontRegistry.Workers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 
@@ -17,7 +19,7 @@ namespace DuPontRegistry
             services.AddSingleton<ICarDp, CarDp>();
             services.AddSingleton<ISellerDp, SellerDp>();
             services.AddSingleton<IBuyerDp, BuyerDp>();
-            services.AddSingleton<ICarDp, CarDp>();
+            services.AddSingleton<ICar, CarService>();
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
 

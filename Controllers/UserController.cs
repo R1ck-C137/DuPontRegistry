@@ -109,7 +109,18 @@ namespace DuPontRegistry.Controllers
 
             Response.Cookies.Append("sid", _user.Base64Encode(login + ":" + password), _user.GetCookieOptions());
             return new JObject{
-                {"success", true},
+                {"success", true}
+            };
+        }
+        
+        [HttpPost]
+        [Route("logout")]
+        public JObject Logout()
+        {
+            Response.Cookies.Delete("sid");
+            return new JObject()
+            {
+                {"success", true}
             };
         }
     }

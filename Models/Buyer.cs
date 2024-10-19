@@ -11,18 +11,17 @@
             CreateDate = DateTime.Now;
             ModifyDate = DateTime.Now;
         }
-        public override string GetFields()
+        public static string GetFields()
         {
-            return base.GetFields() + $@", ""{nameof(FirstName)}"", ""{nameof(LastName)}"", ""{nameof(Phone)}""";
+            return UserFields + $@", ""{nameof(FirstName)}"", ""{nameof(LastName)}"", ""{nameof(Phone)}""";
         }
-        public override string GetValuesName()
+        public static string GetValuesName()
         {
-            return base.GetValuesName() + $", @{nameof(FirstName)}, @{nameof(LastName)}, @{nameof(Phone)}";
+            return UserValuesName + $", @{nameof(FirstName)}, @{nameof(LastName)}, @{nameof(Phone)}";
         }
         public override string ToString()
         {
-            return base.ToString() + $@", {nameof(FirstName)}:""{FirstName}"", {nameof(LastName)}:""{LastName}"", {nameof(Phone)}:""{Phone}""";
+            return UserToString + $@", {nameof(FirstName)}:""{FirstName}"", {nameof(LastName)}:""{LastName}"", {nameof(Phone)}:""{Phone}""";
         }
     }
-    
 }

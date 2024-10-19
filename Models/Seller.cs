@@ -12,19 +12,19 @@ namespace DuPontRegistry.Models
         public string Metro { get; set; }
         public string State { get; set; }
         public JObject Contact { get; set; }
-        public override string GetFields()
+        public static string GetFields()
         {
-            return base.GetFields() + $@", ""{nameof(Title)}"", ""{nameof(Web)}"", ""{nameof(City)}"", ""{nameof(Logo)}"", ""{nameof(Descr)}"", ""{nameof(Metro)}"", ""{nameof(State)}"", ""{nameof(Contact)}""";
+            return UserFields + $@", ""{nameof(Title)}"", ""{nameof(Web)}"", ""{nameof(City)}"", ""{nameof(Logo)}"", ""{nameof(Descr)}"", ""{nameof(Metro)}"", ""{nameof(State)}"", ""{nameof(Contact)}""";
         }
 
-        public override string GetValuesName()
+        public static string GetValuesName()
         {
-            return base.GetValuesName() + $", @{nameof(Title)}, @{nameof(Web)}, @{nameof(City)}, @{nameof(Logo)}, @{nameof(Descr)}, @{nameof(Metro)}, @{nameof(State)}, @{nameof(Contact)}";
+            return UserValuesName + $", @{nameof(Title)}, @{nameof(Web)}, @{nameof(City)}, @{nameof(Logo)}, @{nameof(Descr)}, @{nameof(Metro)}, @{nameof(State)}, @{nameof(Contact)}";
         }
 
         public override string ToString()
         {
-            return base.ToString() + $@", {nameof(Title)}:""{Title}"", {nameof(Web)}:""{Web}"", {nameof(City)}:""{City}"", {nameof(Logo)}:""{Logo}"", {nameof(Descr)}:""{Metro}"", {nameof(State)}:""{State}"", {nameof(Contact)}:""{Contact}""";
+            return UserToString + $@", {nameof(Title)}:""{Title}"", {nameof(Web)}:""{Web}"", {nameof(City)}:""{City}"", {nameof(Logo)}:""{Logo}"", {nameof(Descr)}:""{Metro}"", {nameof(State)}:""{State}"", {nameof(Contact)}:""{Contact}""";
         }
     }
 }

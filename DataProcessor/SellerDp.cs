@@ -35,7 +35,7 @@ namespace DuPontRegistry.DataProcessor
 
         public int? CrateSeller(Seller seller)
         {
-            var insertNewSeller = new NpgsqlCommand(@$"INSERT INTO public.""Seller"" ({seller.GetFields()}) VALUES ({seller.GetValuesName()}) RETURNING ""Id""");
+            var insertNewSeller = new NpgsqlCommand(@$"INSERT INTO public.""Seller"" ({Seller.GetFields()}) VALUES ({Seller.GetValuesName()}) RETURNING ""Id""");
             insertNewSeller.Parameters.Add(new NpgsqlParameter("@Email", seller.Email));
             insertNewSeller.Parameters.Add(new NpgsqlParameter("@Password", seller.Password));
             insertNewSeller.Parameters.Add(new NpgsqlParameter("@Title", seller.Title));
