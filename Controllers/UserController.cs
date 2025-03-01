@@ -61,7 +61,7 @@ namespace DuPontRegistry.Controllers
         
         [HttpPost]
         [Route("create/buyer")]
-        public JObject CreateBuyer(Buyer buyer)
+        public JObject CreateBuyer( Buyer buyer)
         {
             try
             {

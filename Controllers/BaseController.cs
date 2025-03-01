@@ -6,8 +6,6 @@ namespace DuPontRegistry.Controllers
     [TypeFilter(typeof(LogActionAttribute))]
     public class BaseController : Controller
     {
-        protected IConfiguration Configuration;
-
         protected NLog.Logger logger;
 
         public BaseController()
